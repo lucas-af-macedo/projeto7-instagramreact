@@ -1,5 +1,10 @@
+import React from 'react';
+
 function Post(props){
-    const a= props.pessoasCurtiu.toLocaleString('pt-BR');
+    const [curtidas, setCurtidas] = React.useState(props.pessoasCurtiu);
+    const [coracao, setCoracao] = React.useState("heart-outline");
+    const [cor, setCor] = React.useState("");
+    const [salvar, setSalvar] = React.useState("bookmark-outline");
     return(
         <div class="post">
         <div class="topo">
@@ -13,25 +18,25 @@ function Post(props){
         </div>
 
         <div class="conteudo">
-          <img src={props.imagem}/>
+          <img onClick={() =>{if(cor===''){setCor('vermelho');setCoracao('heart');setCurtidas(curtidas+1);}}} src={props.imagem}/>
         </div>
 
         <div class="fundo">
           <div class="acoes">
             <div>
-              <ion-icon class='' name="heart-outline"></ion-icon>
+              <ion-icon onClick={() =>{ if(cor===''){setCor('vermelho');setCoracao('heart');setCurtidas(curtidas+1);}else{setCor('');setCoracao('heart-outline');setCurtidas(curtidas-1);} }}class={cor} name={coracao}></ion-icon>
               <ion-icon name="chatbubble-outline"></ion-icon>
               <ion-icon name="paper-plane-outline"></ion-icon>
             </div>
             <div>
-              <ion-icon name="bookmark-outline"></ion-icon>
+              <ion-icon onClick={() =>{if (salvar === 'bookmark'){setSalvar('bookmark-outline')}else{setSalvar('bookmark')}}} name={salvar}></ion-icon>
             </div>
           </div>
 
           <div class="curtidas">
             <img src={props.imagemCurtiu}/>
             <div class="texto">
-              Curtido por <strong>{props.nomeCurtiu}</strong> e <strong>outras {a} pessoas</strong>
+              Curtido por <strong>{props.nomeCurtiu}</strong> e <strong>outras {curtidas.toLocaleString('pt-BR')} pessoas</strong>
             </div>
           </div>
         </div>

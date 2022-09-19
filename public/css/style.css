@@ -180,6 +180,10 @@ body {
   cursor: pointer;
 }
 
+.post .vermelho{
+  color: red;
+}
+
 .post .conteudo img {
   width: 100%;
 }
